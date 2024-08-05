@@ -35,3 +35,26 @@ VALUES (11, 'Kathy Parker', 'Data Scientist', 69000, 'Analytics', TO_DATE('2020-
 INSERT INTO Employees (EmployeeID, Name, Position, Salary, Department, HireDate)
 VALUES (12, 'Leo Quinn', 'Software Engineer', 64000, 'IT', TO_DATE('2022-03-30', 'YYYY-MM-DD'));
 
+-- Package Specification
+CREATE OR REPLACE PACKAGE CustomerManagement AS
+    PROCEDURE AddCustomer(p_CustomerID IN NUMBER, p_Name IN VARCHAR2, p_DOB IN DATE, p_Balance IN NUMBER);
+    PROCEDURE UpdateCustomer(p_CustomerID IN NUMBER, p_Name IN VARCHAR2, p_DOB IN DATE, p_Balance IN NUMBER);
+    FUNCTION GetCustomerBalance(p_CustomerID IN NUMBER) RETURN NUMBER;
+END CustomerManagement;
+/
+
+-- Package Specification
+CREATE OR REPLACE PACKAGE EmployeeManagement AS
+    PROCEDURE HireEmployee(p_EmployeeID IN NUMBER, p_Name IN VARCHAR2, p_Position IN VARCHAR2, p_Salary IN NUMBER, p_Department IN VARCHAR2, p_HireDate IN DATE);
+    PROCEDURE UpdateEmployee(p_EmployeeID IN NUMBER, p_Name IN VARCHAR2, p_Position IN VARCHAR2, p_Salary IN NUMBER, p_Department IN VARCHAR2);
+    FUNCTION CalculateAnnualSalary(p_EmployeeID IN NUMBER) RETURN NUMBER;
+END EmployeeManagement;
+/
+
+-- Package Specification
+CREATE OR REPLACE PACKAGE AccountOperations AS
+    PROCEDURE OpenAccount(p_AccountID IN NUMBER, p_CustomerID IN NUMBER, p_AccountType IN VARCHAR2, p_Balance IN NUMBER);
+    PROCEDURE CloseAccount(p_AccountID IN NUMBER);
+    FUNCTION GetTotalBalance(p_CustomerID IN NUMBER) RETURN NUMBER;
+END AccountOperations;
+/
