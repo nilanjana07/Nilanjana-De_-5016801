@@ -6,11 +6,15 @@
 
     <!-- Define BookRepository bean -->
     <bean id="bookRepository" class="com.library.repository.BookRepository"/>
-
+<bean id="loggingAspect" class="com.library.aspect.LoggingAspect"/>
+<aop:aspectj-autoproxy/>
     <!-- Define BookService bean -->
     <bean id="bookService" class="com.library.service.BookService">
         <property name="bookRepository" ref="bookRepository"/>
     </bean>
+<bean id="bookService" class="com.library.service.BookService">
+    <constructor-arg ref="bookRepository"/>
+</bean>
 
 </beans>
-
+<context:component-scan base-package="com.library"/>
